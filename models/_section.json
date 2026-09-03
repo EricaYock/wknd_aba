@@ -183,7 +183,8 @@
         "video",
         "form",
         "embed-adaptive-form",
-        "speaker"
+        "speaker",
+        "arieles-block"
       ]
     }
   ]
