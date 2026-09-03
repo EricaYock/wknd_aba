@@ -1,0 +1,665 @@
+/* --------------------------
+   Base arieles-block Layout
+--------------------------- */
+.arieles-block-container .arieles-block-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.arieles-block {
+  position: relative;
+  padding: 40px 24px;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ensure all direct child divs stay within the arieles-block bounds */
+.arieles-block > div {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* --------------------------
+   Headings & Paragraphs
+--------------------------- */
+.arieles-block h1,
+.arieles-block h2,
+.arieles-block h3,
+.arieles-block h4,
+.arieles-block h5,
+.arieles-block h6,
+.arieles-block p {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-light);
+  text-align: center;
+  font-family: var(--black-font-family);
+}
+
+/* Special underline (only for h1 by default) */
+.arieles-block h1::after {
+  background-color: var(--main-accent-color);
+  content: "";
+  display: block;
+  height: 5px;
+  margin: 20px auto 30px;
+  width: 128px;
+  transition: width .4s ease-in-out;
+}
+
+/* Left-aligned layouts: the title underline hugs the left like the title. */
+.arieles-block.image-left h1::after,
+.arieles-block.image-right h1::after,
+.arieles-block.image-background-text-left h1::after,
+.arieles-block.image-background-text-right h1::after {
+  margin-left: 0;
+}
+
+/* Remove underline when class applied */
+.arieles-block.removeunderline h1::after,
+.arieles-block.removeunderline h2::after,
+.arieles-block.removeunderline h3::after,
+.arieles-block.removeunderline h4::after,
+.arieles-block.removeunderline h5::after,
+.arieles-block.removeunderline h6::after {
+  display: none;
+}
+
+/* --------------------------
+   arieles-block Background Image
+--------------------------- */
+.arieles-block picture {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  box-sizing: border-box;
+}
+
+.arieles-block img {
+  object-fit: cover;
+  object-position: left;
+  width: 100%;
+  height: 100%;
+}
+
+/* --------------------------
+   arieles-block Background Video
+--------------------------- */
+video.arieles-block-video-bg {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* For side-by-side layouts the video sits in-flow */
+.arieles-block.image-left video.arieles-block-video-bg,
+.arieles-block.image-right video.arieles-block-video-bg,
+.arieles-block.image-top video.arieles-block-video-bg,
+.arieles-block.image-bottom video.arieles-block-video-bg {
+  position: relative;
+  inset: auto;
+  min-height: 400px;
+}
+
+/* Ensure the asset slot div sizes correctly when holding video */
+.arieles-block.arieles-block-video.image-left > div:first-child,
+.arieles-block.arieles-block-video.image-right > div:first-child {
+  flex: 0 0 50%;
+  overflow: hidden;
+}
+
+.arieles-block.arieles-block-video.image-top > div:first-child,
+.arieles-block.arieles-block-video.image-bottom > div:first-child {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+/* --------------------------
+   Buttons
+--------------------------- */
+
+
+/* Primary CTA */
+.arieles-block-wrapper .button-container.cta-button a.button {
+  background-color: var(--main-accent-color);
+  border: 2px solid var(--main-accent-color);
+}
+
+.arieles-block-wrapper .button-container.cta-button a.button::after {
+  content: "\f105";
+  font-family: 'Font Awesome 5 Solid';
+  font-size: 20px;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  color: var(--text-light);
+}
+
+.arieles-block-wrapper .button-container.cta-button a.button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-light) !important;
+  border-color: var(--text-light) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-1px);
+}
+
+.arieles-block-wrapper .button-container.cta-button a.button:hover::after {
+  color: var(--text-light) !important;
+  transform: translateX(2px);
+}
+
+/* Secondary CTA */
+.arieles-block-wrapper .button-container.cta-button-secondary a.button {
+  background: transparent;
+  border: 2px solid var(--main-accent-color);
+  color: var(--text-light);
+}
+
+.arieles-block-wrapper .button-container.cta-button-secondary a.button::after {
+  content: "\f105";
+  font-family: 'Font Awesome 5 Solid';
+  font-size: 20px;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  color: var(--text-light);
+}
+
+.arieles-block-wrapper .button-container.cta-button-secondary a.button:hover {
+  background-color: var(--main-accent-color);
+  color: var(--text-light);
+}
+
+.arieles-block-wrapper .button-container.cta-button-secondary a.button:hover::after {
+  color: var(--text-dark);
+  transform: translateX(2px);
+}
+
+/* Accessibility */
+.arieles-block-wrapper .button-container a.button:focus {
+  outline: 2px solid var(--main-accent-color);
+  outline-offset: 2px;
+}
+
+/* Minimal variation */
+.arieles-block .button-container.cta-minimal a.button::after {
+  margin-left: 4px;
+}
+
+/* --------------------------
+   Layout Variations
+--------------------------- */
+.arieles-block.image-left,
+.arieles-block.image-right,
+.arieles-block.image-top,
+.arieles-block.image-bottom {
+  gap: 40px;
+  padding: 0;
+  min-height: auto;
+}
+
+
+.arieles-block.image-left {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.arieles-block.image-right {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+.arieles-block.image-top {
+  flex-direction: column;
+}
+.arieles-block.image-bottom {
+  flex-direction: column-reverse;
+}
+
+/* Image Background Text Left - Text overlaid on background image, left-aligned */
+.arieles-block.image-background-text-left {
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  padding: 60px 40px;
+}
+
+.arieles-block.image-background-text-left > div {
+  text-align: left;
+  max-width: min(600px, 100%);
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Image Background Text Right - Text overlaid on background image, right-aligned */
+.arieles-block.image-background-text-right {
+  justify-content: flex-end;
+  align-items: center;
+  text-align: left;
+  padding: 60px 40px;
+}
+
+.arieles-block.image-background-text-right > div {
+  text-align: left;
+  max-width: min(600px, 100%);
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.arieles-block.image-left picture,
+.arieles-block.image-right picture,
+.arieles-block.image-top picture,
+.arieles-block.image-bottom picture {
+  position: relative;
+  z-index: 1;
+}
+
+.arieles-block.image-left > div:first-child picture,
+.arieles-block.image-right > div:first-child picture {
+  height: 100%;
+  width: 100%;
+}
+
+.arieles-block.image-top picture,
+.arieles-block.image-bottom picture {
+  width: 100%;
+  height: 400px;
+}
+
+/* Text align adjustments */
+.arieles-block.image-left > div:first-child,
+.arieles-block.image-right > div:first-child {
+  flex: 0 0 50%;
+}
+
+.arieles-block.image-left > div:nth-child(2),
+.arieles-block.image-right > div:nth-child(2) {
+  flex: 0 0 50%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.arieles-block.image-right > div:nth-child(2) {
+  padding-left: 80px;
+}
+
+picture {
+    line-height: 0;
+}
+/* Box shadow for layout variations */
+.arieles-block.image-left,
+.arieles-block.image-right,
+.arieles-block.image-top,
+.arieles-block.image-bottom {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+.arieles-block.image-left h2,
+.arieles-block.image-left h3,
+.arieles-block.image-left h4,
+.arieles-block.image-left h5,
+.arieles-block.image-left h6,
+.arieles-block.image-left p,
+.arieles-block.image-right h2,
+.arieles-block.image-right h3,
+.arieles-block.image-right h4,
+.arieles-block.image-right h5,
+.arieles-block.image-right h6,
+.arieles-block.image-right p {
+  text-align: left;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  color: var(--text-color);
+    text-shadow: unset;
+}
+.arieles-block.image-left h1,.arieles-block.image-right h1{
+  color: var(--text-color);
+  text-shadow: unset;
+  text-align: left;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.arieles-block.image-background-text-left h1,
+.arieles-block.image-background-text-left h2,
+.arieles-block.image-background-text-left h3,
+.arieles-block.image-background-text-left h4,
+.arieles-block.image-background-text-left h5,
+.arieles-block.image-background-text-left h6,
+.arieles-block.image-background-text-left p {
+  text-align: left;
+  margin: 0 0 20px 0;
+  width: 100%;
+  max-width: none;
+  color: var(--text-light);
+}
+
+.arieles-block.image-background-text-left .button-container {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.arieles-block.image-background-text-right h1,
+.arieles-block.image-background-text-right h2,
+.arieles-block.image-background-text-right h3,
+.arieles-block.image-background-text-right h4,
+.arieles-block.image-background-text-right h5,
+.arieles-block.image-background-text-right h6,
+.arieles-block.image-background-text-right p {
+  text-align: left;
+  margin: 0 0 20px 0;
+  width: 100%;
+  max-width: none;
+  color: var(--text-light);
+}
+
+.arieles-block.image-background-text-right .button-container {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.arieles-block.image-top h1,
+.arieles-block.image-top h2,
+.arieles-block.image-top h3,
+.arieles-block.image-top h4,
+.arieles-block.image-top h5,
+.arieles-block.image-top h6,
+.arieles-block.image-top p,
+.arieles-block.image-bottom h1,
+.arieles-block.image-bottom h2,
+.arieles-block.image-bottom h3,
+.arieles-block.image-bottom h4,
+.arieles-block.image-bottom h5,
+.arieles-block.image-bottom h6,
+.arieles-block.image-bottom p{
+  text-align: center;
+  max-width: none;
+  color: var(--text-color);
+    text-shadow: unset;
+}
+/* --------------------------
+   Responsive
+--------------------------- */
+@media (width >= 900px) {
+  .arieles-block { padding: 40px 32px; }
+  .arieles-block-wrapper a.button { padding: 14px 28px; font-size: 18px; }
+}
+
+@media (width < 1024px) {
+  .arieles-block { min-height: 650px; }
+
+  .arieles-block.image-background-text-left {
+    padding: 50px 30px;
+  }
+
+  .arieles-block.image-background-text-right {
+    padding: 50px 30px;
+  }
+
+  .arieles-block.image-background-text-left > div,
+  .arieles-block.image-background-text-right > div {
+    max-width: min(600px, calc(100% - 20px));
+  }
+}
+
+@media (width < 768px) {
+  .arieles-block { min-height: 600px; }
+
+  .arieles-block.image-left,
+  .arieles-block.image-right {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .arieles-block.image-left picture,
+  .arieles-block.image-right picture {
+    width: 100%;
+    height: 300px;
+    flex: none;
+  }
+
+  .arieles-block.arieles-block-video.image-left video.arieles-block-video-bg,
+  .arieles-block.arieles-block-video.image-right video.arieles-block-video-bg {
+    min-height: 300px;
+    height: 300px;
+  }
+
+  .arieles-block.image-left > div:last-child,
+  .arieles-block.image-right > div:last-child {
+    text-align: center;
+  }
+
+  .arieles-block.image-left h2,
+  .arieles-block.image-left h3,
+  .arieles-block.image-left h4,
+  .arieles-block.image-left h5,
+  .arieles-block.image-left h6,
+  .arieles-block.image-left p,
+  .arieles-block.image-right h2,
+  .arieles-block.image-right h3,
+  .arieles-block.image-right h4,
+  .arieles-block.image-right h5,
+  .arieles-block.image-right h6,
+  .arieles-block.image-right p {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .arieles-block.image-top picture,
+  .arieles-block.image-bottom picture {
+    height: 250px;
+  }
+
+  .arieles-block.arieles-block-video.image-top > div:first-child,
+  .arieles-block.arieles-block-video.image-bottom > div:first-child {
+    height: 250px;
+  }
+
+  .arieles-block.arieles-block-video.image-top video.arieles-block-video-bg,
+  .arieles-block.arieles-block-video.image-bottom video.arieles-block-video-bg {
+    min-height: 250px;
+  }
+  
+  /* Mobile adjustments for image-background-text-left */
+  .arieles-block.image-background-text-left {
+    padding: 40px 16px;
+    text-align: center;
+  }
+
+  .arieles-block.image-background-text-left > div {
+    max-width: 100%;
+  }
+
+  .arieles-block.image-background-text-left h1,
+  .arieles-block.image-background-text-left h2,
+  .arieles-block.image-background-text-left h3,
+  .arieles-block.image-background-text-left h4,
+  .arieles-block.image-background-text-left h5,
+  .arieles-block.image-background-text-left h6,
+  .arieles-block.image-background-text-left p {
+    text-align: center;
+  }
+
+  .arieles-block.image-background-text-left .button-container {
+    text-align: center;
+  }
+
+  /* Mobile adjustments for image-background-text-right */
+  .arieles-block.image-background-text-right {
+    padding: 40px 16px;
+    text-align: center;
+  }
+
+  .arieles-block.image-background-text-right > div {
+    max-width: 100%;
+  }
+
+  .arieles-block.image-background-text-right h1,
+  .arieles-block.image-background-text-right h2,
+  .arieles-block.image-background-text-right h3,
+  .arieles-block.image-background-text-right h4,
+  .arieles-block.image-background-text-right h5,
+  .arieles-block.image-background-text-right h6,
+  .arieles-block.image-background-text-right p,
+  .arieles-block.image-background-text-right .button-container {
+    text-align: center;
+  }
+
+  .arieles-block.image-background-text-right .button-container {
+    text-align: center;
+  }
+
+  /* Default overlay — constrain text on mobile */
+  .arieles-block.block.overlay .arieles-block-text {
+    max-width: calc(100% - 32px);
+    padding: 16px;
+  }
+
+  /* Side-by-side layouts — text panel goes full width on mobile */
+  .arieles-block.image-left > div:nth-child(2),
+  .arieles-block.image-right > div:nth-child(2) {
+    flex: 1 1 auto;
+    padding: 24px 16px;
+  }
+}
+
+@media (width < 480px) {
+  .arieles-block {
+    min-height: 400px;
+    padding: 24px 12px;
+  }
+
+  .arieles-block.image-background-text-left,
+  .arieles-block.image-background-text-right {
+    padding: 24px 12px;
+  }
+
+  .arieles-block h1 { font-size: 1.6rem; }
+  .arieles-block h2 { font-size: 1.3rem; }
+}
+
+/* --------------------------
+   Background Style Variations
+--------------------------- */
+
+/* Theme Dark Background Style — applies to the text box only, never the asset */
+.arieles-block.theme-dark .arieles-block-text {
+  background: var(--dark-color);
+}
+
+.arieles-block.theme-dark h1,
+.arieles-block.theme-dark h2,
+.arieles-block.theme-dark h3,
+.arieles-block.theme-dark h4,
+.arieles-block.theme-dark h5,
+.arieles-block.theme-dark h6,
+.arieles-block.theme-dark p {
+  color: var(--light-color);
+}
+
+.arieles-block.theme-dark .button-container a.button {
+  color: var(--light-color);
+  border-color: var(--light-color);
+}
+
+/* Theme Light Background Style — applies to the text box only, never the asset */
+.arieles-block.theme-light .arieles-block-text {
+  background: var(--light-color);
+}
+
+.arieles-block.theme-light h1,
+.arieles-block.theme-light h2,
+.arieles-block.theme-light h3,
+.arieles-block.theme-light h4,
+.arieles-block.theme-light h5,
+.arieles-block.theme-light h6,
+.arieles-block.theme-light p {
+  color: var(--dark-color);
+}
+
+.arieles-block.theme-light .button-container a.button {
+  color: var(--dark-color);
+  border-color: var(--dark-color);
+}
+
+/* Overlay text box — targets .arieles-block-text class set by JS, so it is always
+   the correct div regardless of whether a <video> was prepended */
+.arieles-block.block.overlay .arieles-block-text,
+.arieles-block.image-background-text-left .arieles-block-text,
+.arieles-block.image-background-text-right .arieles-block-text {
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Default semi-transparent backdrop for the text box — only when no Text
+   Background Style is chosen, so Theme Dark/Light can take over the box bg. */
+.arieles-block.block.overlay:not(.theme-dark):not(.theme-light) .arieles-block-text,
+.arieles-block.image-background-text-left:not(.theme-dark):not(.theme-light) .arieles-block-text,
+.arieles-block.image-background-text-right:not(.theme-dark):not(.theme-light) .arieles-block-text {
+  background: rgb(0 0 0 / 50%);
+}
+
+/*button theme arieles-block specific*/
+.arieles-block.block.overlay .button-container.cta-link a.button,.arieles-block.image-background-text-left .button-container.cta-link a.button,.arieles-block.image-background-text-right .button-container.cta-link a.button {
+  color: var(--text-light);
+}
+
+.arieles-block.block.overlay .button-container.cta-link a.button::after  ,.arieles-block.image-background-text-left .button-container.cta-link a.button::after,.arieles-block.image-background-text-right .button-container.cta-link a.button::after  {
+  color: var(--text-light);
+}
+
+/* --------------------------
+   Badge / Highlight pill
+--------------------------- */
+.arieles-block .arieles-block__badge {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  /* Centered by default so it matches the centered title in the overlay,
+     asset-top and asset-bottom layouts. Auto side margins center a
+     fit-content block; the left-aligned layouts override this below. */
+  margin: 0 auto 12px;
+  padding: 7px 18px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-light);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Left-aligned layouts: the badge hugs the left edge like the title/text. */
+.arieles-block.image-left .arieles-block__badge,
+.arieles-block.image-right .arieles-block__badge,
+.arieles-block.image-background-text-left .arieles-block__badge,
+.arieles-block.image-background-text-right .arieles-block__badge {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Light text-panel layouts (dark title): badge uses dark text + a faint
+   dark chip to stay legible. */
+.arieles-block.image-left .arieles-block__badge,
+.arieles-block.image-right .arieles-block__badge,
+.arieles-block.image-top .arieles-block__badge,
+.arieles-block.image-bottom .arieles-block__badge {
+  color: var(--text-color);
+  background: rgba(0, 0, 0, 0.08);
+}
